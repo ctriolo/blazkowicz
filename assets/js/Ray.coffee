@@ -1,8 +1,12 @@
 class Ray
   constructor: (@point, @vector) ->
+
   getPoint: (distance) -> @point.add(@vector.mul(distance))
+
   getDistance: (point) -> (point.x - @point.x) / @vector.x
+
   computeIntersectionWithRay: (ray) ->
+    throw 'Doesnt work'
     div = @vector.x * ray.vector.x - @vector.y * ray.vector.y
     if (div == 0)
       null
@@ -13,6 +17,7 @@ class Ray
         return null
       else
         return @getPoint distance
+
   computeIntersectionWithHorizontalLine: (line) ->
     d = (line.point1.x - @point.x) / @vector.x
     return null if (d < 0)
@@ -21,6 +26,7 @@ class Ray
       p
     else
       null
+
   computeIntersectionWithVerticalLine: (line) ->
     d = (line.point1.y - @point.y) / @vector.y
     return null if (d < 0)
@@ -29,13 +35,14 @@ class Ray
       p
     else
       null
+
   computeIntersectionWithLine: (line) ->
     if (line.point1.x == line.point2.x)
       @computeIntersectionWithHorizontalLine(line)
     else if (line.point1.y == line.point2.y)
       @computeIntersectionWithVerticalLine(line)
     else
-      alert('oops')
+      throw 'Doesnt work'
       ray = new Ray(line.point1, line.point1.sub(line.point2).nor())
       point = @computeIntersectionWithRay(ray)
       if !point || line.point1.dis(point) > line.length()

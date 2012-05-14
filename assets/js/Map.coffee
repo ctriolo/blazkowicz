@@ -39,7 +39,7 @@ class Map
     min = null
     for wall in @walls
       intersection = wall.computeIntersection ray
-      if (intersection and (!min or intersection.distance < min.distance))
+      if intersection and (!min or intersection.distance < min.distance)
         min = intersection;
     return min
 
@@ -50,12 +50,12 @@ class Map
     for i in [0...@array.length]
       for j in [0...@array[i].length]
         if (@array[i][j] in LEGEND.WALLS)
-          if ((i+j)%2) then context.fillStyle = "#333"
-          else context.fillStyle = "#000"
+          if ((i+j)%2) then context.fillStyle = '#333'
+          else context.fillStyle = '#000'
         else
-          if ((i+j)%2) then context.fillStyle = "#ddd"
-          else context.fillStyle = "#fff"
-        context.fillRect(i*10, j*10, 10, 10)
+          if ((i+j)%2) then context.fillStyle = '#fff'
+          else context.fillStyle = '#bbb'
+        context.fillRect(i * 10, j * 10, 10, 10)
 
     # Draw rays
     #context.strokeStyle = "#0ff"
@@ -66,26 +66,25 @@ class Map
     #context.stroke()
 
     # Draw player->intersection
-    context.strokeStyle = "#00f"
+    context.strokeStyle = '#00f'
     context.beginPath()
     for intersection in intersections
-      context.moveTo(player.position.x*10,player.position.y*10)
-      context.lineTo(intersection.point.x*10,intersection.point.y*10)
+      context.moveTo player.position.x * 10, player.position.y * 10
+      context.lineTo intersection.point.x * 10, intersection.point.y * 10
     context.stroke()
 
     # Draw player
-    context.fillStyle = "#f00"
+    context.fillStyle = '#f00'
     context.beginPath()
-    context.arc(player.position.x*10,player.position.y*10,2,0,Math.PI*2,true);
+    context.arc player.position.x * 10, player.position.y * 10, 2, 0, Math.PI * 2, true
     context.fill()
 
     # Draw direction
-    context.strokeStyle = "#0f0"
+    context.strokeStyle = '#0f0'
     context.beginPath()
-    context.moveTo(player.position.x*10,player.position.y*10)
-    context.lineTo(
-      player.towards.add(player.position).x*10,
-      player.towards.add(player.position).y*10)
+    context.moveTo player.position.x*10, player.position.y*10
+    context.lineTo player.towards.add(player.position).x*10,
+      player.towards.add(player.position).y*10
     context.stroke()
 
 # Export
