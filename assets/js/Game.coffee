@@ -21,7 +21,7 @@ class Game
     # Render the walls
     for column in [0...@canvas.width]
       ray = @player.constructRay @canvas.width, column
-      intersection = @map.computeWall ray
+      intersection = @map.computeWallIntersection ray
       intersections.push intersection if intersection?
       intersection?.object.render @canvas, @player, column, intersection
 

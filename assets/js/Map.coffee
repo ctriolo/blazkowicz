@@ -35,7 +35,7 @@ class Map
     context.fillStyle = '#444'
     context.fillRect 0, canvas.height/2, canvas.width, canvas.height/2
 
-  computeWall: (ray) ->
+  computeWallIntersection: (ray) ->
     min = null
     for wall in @walls
       intersection = wall.computeIntersection ray
@@ -57,14 +57,6 @@ class Map
           else context.fillStyle = '#bbb'
         context.fillRect(i * 10, j * 10, 10, 10)
 
-    # Draw rays
-    #context.strokeStyle = "#0ff"
-    #context.beginPath()
-    #for ray in rays
-    #  context.moveTo(ray.point.x*10,ray.point.y*10)
-    #  context.lineTo(ray.point.add(ray.vector).x*10,ray.point.add(ray.vector).y*10)
-    #context.stroke()
-
     # Draw player->intersection
     context.strokeStyle = '#00f'
     context.beginPath()
@@ -78,14 +70,6 @@ class Map
     context.beginPath()
     context.arc player.position.x * 10, player.position.y * 10, 2, 0, Math.PI * 2, true
     context.fill()
-
-    # Draw direction
-    context.strokeStyle = '#0f0'
-    context.beginPath()
-    context.moveTo player.position.x*10, player.position.y*10
-    context.lineTo player.towards.add(player.position).x*10,
-      player.towards.add(player.position).y*10
-    context.stroke()
 
 # Export
 window.Map = Map
