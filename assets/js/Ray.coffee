@@ -1,5 +1,6 @@
 class Ray
-  constructor: (@point, @vector) ->
+  constructor: (@point, vector) ->
+    @vector = vector.nor()
 
   getPoint: (distance) -> @point.add(@vector.mul(distance))
 

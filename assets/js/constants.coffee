@@ -1,3 +1,5 @@
+window.EPSILON = .000001
+
 # Textures
 window.TEXTURE = {}
 TEXTURE.BRICK = new Image()

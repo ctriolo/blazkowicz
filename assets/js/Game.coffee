@@ -42,6 +42,10 @@ class Game
     @player.moveBack    dt if @keys[83] or @keys[40]
     @player.rotateLeft  dt if @keys[81]
     @player.rotateRight dt if @keys[69]
+    @player.update dt, @map
+
+    # Translate received key presses into enemy actions
+    # TODO
 
     # Render everything
     @render()
