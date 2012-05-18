@@ -21,9 +21,11 @@ class Game
     # Render the walls
     for column in [0...@canvas.width]
       ray = @player.constructRay @canvas.width, column
-      intersection = @map.computeWallIntersection ray
-      intersections.push intersection if intersection?
-      intersection?.object.render @canvas, @player, column, intersection
+      [wIntersection, eIntersections] = @map.computeIntersections ray, @player
+      intersections.push wIntersection if wIntersection?
+      wIntersection?.object.render @canvas, @player, column, wIntersection
+      for eIntersection in eIntersections
+        eIntersection.object.render @canvas, @player, column, eIntersection
 
     # Render the mini-map
     @map.renderMiniMap @canvas, @player, intersections

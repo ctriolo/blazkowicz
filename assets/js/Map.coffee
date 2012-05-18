@@ -1,5 +1,6 @@
 #= require_tree Math
 #= require Wall
+#= require Entity
 #= require constants
 
 class Map
@@ -13,6 +14,7 @@ class Map
 
   constructor: (@array) ->
     @walls = []
+    @entities = []
     addBlock = (map, a, b, texture) ->
       map.walls.push Wall.constructFromValues   a,   b, a+1,   b, texture
       map.walls.push Wall.constructFromValues   a,   b,   a, b+1, texture
@@ -26,6 +28,7 @@ class Map
           when 's' then addBlock this, i, j, TEXTURE.GREY_STONE
           when 'c' then addBlock this, i, j, TEXTURE.COLOR_STONE
           when 'p' then @spawn = new Vector i+.5, j+.5
+          when 'e' then @entities.push Entity.pillar new Vector i+.5, j+.5
 
   renderBackground: (canvas) ->
     context = canvas.getContext '2d'
@@ -35,17 +38,40 @@ class Map
     context.fillStyle = '#444'
     context.fillRect 0, canvas.height/2, canvas.width, canvas.height/2
 
-  computeWallIntersection: (ray) ->
+  computeIntersections: (ray, player) ->
 
-    # Compute wall intersections
+    # Compute closest wall intersections
     min = null
     for wall in @walls
       intersection = wall.computeIntersection ray
-      if intersection and (!min or intersection.distance < min.distance)
+      if intersection? and (!min or intersection.distance < min.distance)
         min = intersection;
-    return min
 
     # Computer entity intersections
+    visible = []
+    for entity in @entities
+      intersection = entity.computeIntersection ray, player
+      if intersection? and (!min or intersection.distance < min.distance)
+        visible.push intersection;
+
+    return [min, visible]
+
+  computeCollision: (ray) ->
+    min = null
+
+    # Compute wall collision
+    for wall in @walls
+      intersection = wall.computeIntersection ray
+      if intersection? and (!min or intersection.distance < min.distance)
+        min = intersection
+
+    # Computer entity collision
+    for entity in @entities
+      intersection = entity.computeCollision ray
+      if intersection? and (!min or intersection.distance < min.distance)
+        min = intersection
+
+    return min
 
   renderMiniMap: (canvas, player, intersections) ->
     context = canvas.getContext '2d'

@@ -44,7 +44,7 @@ class Player
       if not @velocity.equ Vector.zero()
         corner = @position.add direction.mul PLAYER_RADIUS
         ray = new Ray corner, @velocity
-        intersection = map.computeWallIntersection ray
+        intersection = map.computeCollision ray
         if intersection.distance < @velocity.mul(dt).mag()
           @velocity = @velocity.nor().mul (intersection.distance-EPSILON)/dt
 
