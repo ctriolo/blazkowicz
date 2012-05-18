@@ -13,7 +13,7 @@ class Game
     @update()
 
   render: ->
-    intersections = [] # Keep track for mini-map
+    mmIntersections = []
 
     # Render the background
     @map.renderBackground @canvas
@@ -21,14 +21,13 @@ class Game
     # Render the walls
     for column in [0...@canvas.width]
       ray = @player.constructRay @canvas.width, column
-      [wIntersection, eIntersections] = @map.computeIntersections ray, @player
-      intersections.push wIntersection if wIntersection?
-      wIntersection?.object.render @canvas, @player, column, wIntersection
-      for eIntersection in eIntersections
-        eIntersection.object.render @canvas, @player, column, eIntersection
+      intersections = @map.computeIntersections ray, @player
+      for intersection in intersections
+        intersection.object.render @canvas, @player, column, intersection
+      mmIntersections.push intersections[0] if intersections[0]
 
     # Render the mini-map
-    @map.renderMiniMap @canvas, @player, intersections
+    @map.renderMiniMap @canvas, @player, mmIntersections
 
   update: ->
 

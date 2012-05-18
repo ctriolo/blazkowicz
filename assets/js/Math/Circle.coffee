@@ -10,8 +10,6 @@ class Circle
     r = @radius
     L = O.sub(P)
 
-    console.log P, V, O, r, L
-
     t_ca = L.dot(V)
     return if t_ca < 0
 

@@ -5,12 +5,25 @@
 
 class Map
   LEGEND = {}
-  LEGEND.SPAWN = 'p'
-  LEGEND.BRICK = 'b'
-  LEGEND.STONE = 's'
-  LEGEND.CAVE  = 'c'
-  LEGEND.ROCK  = 'r'
-  LEGEND.WALLS = [LEGEND.BRICK, LEGEND.STONE, LEGEND.CAVE, LEGEND.ROCK]
+
+  LEGEND.SPAWN = 'v'
+
+  LEGEND.WALLS = [
+    LEGEND.RED_BRICK    = 'R',
+    LEGEND.BLUE_STONE   = 'B',
+    LEGEND.GREY_STONE   = 'G',
+    LEGEND.COLOR_STONE  = 'C',
+    LEGEND.MOSSY_STONE  = 'M',
+    LEGEND.PURPLE_STONE = 'P',
+    LEGEND.WOOD         = 'W',
+  ]
+
+  LEGEND.ENTITIES = [
+    LEGEND.BARREL      = 'b'
+    LEGEND.PILLAR      = 'p'
+    LEGEND.GREEN_LIGHT = 'g'
+  ]
+
 
   constructor: (@array) ->
     @walls = []
@@ -23,12 +36,20 @@ class Map
     for i in [0...@array.length]
       for j in [0...@array[i].length]
         switch(array[i][j])
-          when 'r' then addBlock this, i, j, TEXTURE.RED_BRICK
-          when 'b' then addBlock this, i, j, TEXTURE.BLUE_STONE
-          when 's' then addBlock this, i, j, TEXTURE.GREY_STONE
-          when 'c' then addBlock this, i, j, TEXTURE.COLOR_STONE
-          when 'p' then @spawn = new Vector i+.5, j+.5
-          when 'e' then @entities.push Entity.pillar new Vector i+.5, j+.5
+          # Spawn
+          when LEGEND.SPAWN then @spawn = new Vector i+.5, j+.5
+          # Wall
+          when LEGEND.RED_BRICK then addBlock this, i, j, TEXTURE.RED_BRICK
+          when LEGEND.BLUE_STONE then addBlock this, i, j, TEXTURE.BLUE_STONE
+          when LEGEND.GREY_STONE then addBlock this, i, j, TEXTURE.GREY_STONE
+          when LEGEND.COLOR_STONE then addBlock this, i, j, TEXTURE.COLOR_STONE
+          when LEGEND.MOSSY_STONE then addBlock this, i, j, TEXTURE.MOSSY_STONE
+          when LEGEND.PURPLE_STONE then addBlock this, i, j, TEXTURE.PURPLE_STONE
+          when LEGEND.WOOD then addBlock this, i, j, TEXTURE.WOOD
+          # Entities
+          when LEGEND.BARREL then @entities.push Entity.barrel new Vector i+.5, j+.5
+          when LEGEND.GREEN_LIGHT then @entities.push Entity.greenLight new Vector i+.5, j+.5
+          when LEGEND.PILLAR then @entities.push Entity.pillar new Vector i+.5, j+.5
 
   renderBackground: (canvas) ->
     context = canvas.getContext '2d'
@@ -54,7 +75,12 @@ class Map
       if intersection? and (!min or intersection.distance < min.distance)
         visible.push intersection;
 
-    return [min, visible]
+    visible.push min
+
+    visible.sort (a, b) ->
+      b.distance - a.distance
+
+    return visible
 
   computeCollision: (ray) ->
     min = null
@@ -94,6 +120,16 @@ class Map
       context.moveTo player.position.x * 10, player.position.y * 10
       context.lineTo intersection.point().x * 10, intersection.point().y * 10
     context.stroke()
+
+    # Draw entities
+    context.fillStyle = '#f0f'
+    for i in [0...@array.length]
+      for j in [0...@array[i].length]
+        if (@array[i][j] in LEGEND.ENTITIES)
+          context.beginPath()
+          context.arc (i+.5) * 10,
+            (j+.5) * 10, .5*10, 0, Math.PI * 2, true
+          context.fill()
 
     # Draw player
     context.fillStyle = '#f00'

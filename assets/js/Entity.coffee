@@ -36,5 +36,7 @@ class Entity
       Math.floor(canvas.height / distance) #dHeight
 
   @pillar: (position) -> new Entity position, TEXTURE.PILLAR, true
+  @barrel: (position) -> new Entity position, TEXTURE.BARREL, true
+  @greenLight: (position) -> new Entity position, TEXTURE.GREEN_LIGHT, false
 
 window.Entity = Entity
