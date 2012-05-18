@@ -1,5 +1,5 @@
+#= require_tree Math
 #= require constants
-#= require Vector
 #= require Player
 #= require Map
 

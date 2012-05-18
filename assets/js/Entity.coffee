@@ -1,22 +1,15 @@
-#= require_tree Math
+#= require constants
 
-class Wall
-
-  constructor: (@line, @texture) ->
-    throw 'Need a line and a texture' if not @line or not @texture
-
-  @constructFromPoints: (point1, point2, texture) ->
-    new Wall new LineSegment(point1, point2), texture
-
-  @constructFromValues: (x1, y1, x2, y2, texture) ->
-    @constructFromPoints new Vector(x1,y1), new Vector(x2,y2), texture
+class Entity
+  constructor: (@position, @radius, @texture) ->
 
   computeIntersection: (ray) ->
-    intersection = @line.computeIntersection ray
+    intersection = (new Circle position, .5).computeIntersection ray
     intersection?.attach this
     intersection
 
   render: (canvas, player, column, intersection) ->
+    throw 'not correct'
     context = canvas.getContext '2d'
     IMAGE_HEIGHT = 64
     IMAGE_WIDTH = 64
@@ -30,6 +23,3 @@ class Wall
       Math.floor(canvas.height/2 - (canvas.height / distance)/2), #dy
       1, # dWidth
       Math.floor(canvas.height / distance) #dHeight
-
-# Export
-window.Wall = Wall

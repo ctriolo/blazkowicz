@@ -1,6 +1,5 @@
+#= require_tree Math
 #= require constants
-#= require Vector
-#= require Ray
 
 class Player
   PLAYER_RADIUS        = .2
@@ -22,7 +21,7 @@ class Player
   rotateLeft:  (dt) -> @towards = @towards.rot(-ANGULAR_VELOCITY * dt)
 
   # Update
-  update : (dt, map) ->
+  update: (dt, map) ->
     if (dt is 0) then return
 
     # Calculate acceleration for this time step
@@ -57,11 +56,11 @@ class Player
 
   constructRay: (width, column) ->
     c = @position.add(@towards.mul(@distance))
-    p1 = c.sub(@right().mul(@distance).mul(Math.tan(@angle/2)))
-    p2 = c.add(@right().mul(@distance).mul(Math.tan(@angle/2)))
-    p = p1.add((p2.sub(p1)).mul((column + .5) / width))
-    v = p.sub(@position).div(p.sub(@position).mag())
-    return new Ray(p,v)
+    p1 = c.sub @right().mul @distance * Math.tan @angle/2
+    p2 = c.add @right().mul @distance * Math.tan @angle/2
+    p = p1.add (p2.sub p1).mul (column + .5) / width
+    v = p.sub(@position).div p.sub(@position).mag()
+    return new Ray p, v
 
 # Export
 window.Player = Player

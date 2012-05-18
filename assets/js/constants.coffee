@@ -2,14 +2,20 @@ window.EPSILON = .000001
 
 # Textures
 window.TEXTURE = {}
-TEXTURE.BRICK = new Image()
-TEXTURE.BRICK.src = '/img/wall0.gif'
-TEXTURE.STONE = new Image()
-TEXTURE.STONE.src = '/img/wall1.gif'
-TEXTURE.ROCK = new Image()
-TEXTURE.ROCK.src =  '/img/wall2.gif'
-TEXTURE.CAVE = new Image()
-TEXTURE.CAVE.src =  '/img/wall3.gif'
+TEXTURE.RED_BRICK = new Image()
+TEXTURE.RED_BRICK.src = '/img/wall/redbrick.png'
+TEXTURE.BLUE_STONE = new Image()
+TEXTURE.BLUE_STONE.src = '/img/wall/bluestone.png'
+TEXTURE.GREY_STONE = new Image()
+TEXTURE.GREY_STONE.src = '/img/wall/greystone.png'
+TEXTURE.COLOR_STONE = new Image()
+TEXTURE.COLOR_STONE.src = '/img/wall/colorstone.png'
+TEXTURE.MOSSY_STONE = new Image()
+TEXTURE.MOSSY_STONE.src = '/img/wall/mossy.png'
+TEXTURE.PURPLE_STONE = new Image()
+TEXTURE.PURPLE_STONE.src = '/img/wall/purple.png'
+TEXTURE.WOOD = new Image()
+TEXTURE.WOOD.src = '/img/wall/wood.png'
 
 # Basic map array
 window.MAP_ARRAY = [

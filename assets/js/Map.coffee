@@ -1,4 +1,4 @@
-#= require Vector
+#= require_tree Math
 #= require Wall
 #= require constants
 
@@ -21,10 +21,10 @@ class Map
     for i in [0...@array.length]
       for j in [0...@array[i].length]
         switch(array[i][j])
-          when 'b' then addBlock this, i, j, TEXTURE.BRICK
-          when 's' then addBlock this, i, j, TEXTURE.STONE
-          when 'r' then addBlock this, i, j, TEXTURE.ROCK
-          when 'c' then addBlock this, i, j, TEXTURE.CAVE
+          when 'r' then addBlock this, i, j, TEXTURE.RED_BRICK
+          when 'b' then addBlock this, i, j, TEXTURE.BLUE_STONE
+          when 's' then addBlock this, i, j, TEXTURE.GREY_STONE
+          when 'c' then addBlock this, i, j, TEXTURE.COLOR_STONE
           when 'p' then @spawn = new Vector i+.5, j+.5
 
   renderBackground: (canvas) ->
@@ -36,12 +36,16 @@ class Map
     context.fillRect 0, canvas.height/2, canvas.width, canvas.height/2
 
   computeWallIntersection: (ray) ->
+
+    # Compute wall intersections
     min = null
     for wall in @walls
       intersection = wall.computeIntersection ray
       if intersection and (!min or intersection.distance < min.distance)
         min = intersection;
     return min
+
+    # Computer entity intersections
 
   renderMiniMap: (canvas, player, intersections) ->
     context = canvas.getContext '2d'
@@ -62,7 +66,7 @@ class Map
     context.beginPath()
     for intersection in intersections
       context.moveTo player.position.x * 10, player.position.y * 10
-      context.lineTo intersection.point.x * 10, intersection.point.y * 10
+      context.lineTo intersection.point().x * 10, intersection.point().y * 10
     context.stroke()
 
     # Draw player
