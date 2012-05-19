@@ -26,16 +26,20 @@ TEXTURE.PILLAR       = addTexture '/img/entity/pillar.png'
 TEXTURE.GREEN_LIGHT  = addTexture '/img/entity/greenlight.png'
 
 # Basic map array
-window.MAP_ARRAY = [
-  [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-  [' ', 'R', 'R', 'R', 'R', 'R', 'G', 'G', 'G', 'G', 'G', ' ']
-  [' ', 'R', ' ', 'g', ' ', 'R', 'G', ' ', ' ', ' ', 'G', ' ']
-  [' ', 'R', 'g', ' ', 'g', ' ', ' ', ' ', 'p', ' ', 'G', ' ']
-  [' ', 'R', ' ', 'g', ' ', 'R', 'G', ' ', ' ', ' ', 'G', ' ']
-  [' ', 'R', 'R', ' ', 'R', 'R', 'G', 'G', ' ', 'G', 'G', ' ']
-  [' ', 'B', 'B', ' ', 'B', 'B', 'W', 'W', ' ', 'W', 'W', ' ']
-  [' ', 'B', ' ', ' ', ' ', 'B', 'W', 'b', ' ', 'b', 'W', ' ']
-  [' ', 'B', ' ', 'v', ' ', ' ', ' ', ' ', ' ', ' ', 'W', ' ']
-  [' ', 'B', ' ', ' ', ' ', 'B', 'W', 'b', ' ', 'b', 'W', ' ']
-  [' ', 'B', 'B', 'B', 'B', 'B', 'W', 'W', 'W', 'W', 'W', ' ']
-  [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
+MAP_STRINGS = [
+  '            ',
+  ' RRRRRGGGGG ',
+  ' R g RG   G ',
+  ' Rg g   p G ',
+  ' R g RG   G ',
+  ' RR RRWW WW ',
+  ' B   BWb bW ',
+  ' B v      W ',
+  ' B   BWb bW ',
+  ' BBBBBWWWWW ',
+  '            ',
+  ]
+
+window.MAP_ARRAY = []
+for string in MAP_STRINGS
+  MAP_ARRAY.push string.split ''
