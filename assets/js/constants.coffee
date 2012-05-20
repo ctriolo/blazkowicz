@@ -29,9 +29,9 @@ TEXTURE.GREEN_LIGHT  = addTexture '/img/entity/greenlight.png'
 MAP_STRINGS = [
   '            ',
   ' RRRRRGGGGG ',
-  ' R g RG   G ',
-  ' Rg g   p G ',
-  ' R g RG   G ',
+  ' R l RG   G ',
+  ' Rl l   p G ',
+  ' R l RG   G ',
   ' RR RRWW WW ',
   ' B   BWb bW ',
   ' B v      W ',

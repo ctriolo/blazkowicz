@@ -1,6 +1,6 @@
 #= require_tree Math
 #= require Wall
-#= require Entity
+#= require Entities
 #= require constants
 
 class Map
@@ -19,11 +19,10 @@ class Map
   ]
 
   LEGEND.ENTITIES = [
-    LEGEND.BARREL      = 'b'
-    LEGEND.PILLAR      = 'p'
-    LEGEND.GREEN_LIGHT = 'g'
+    LEGEND.GREEN_BARREL = 'b'
+    LEGEND.PILLAR       = 'p'
+    LEGEND.LIGHT        = 'l'
   ]
-
 
   constructor: (@array) ->
     @walls = []
@@ -47,9 +46,9 @@ class Map
           when LEGEND.PURPLE_STONE then addBlock this, i, j, TEXTURE.PURPLE_STONE
           when LEGEND.WOOD then addBlock this, i, j, TEXTURE.WOOD
           # Entities
-          when LEGEND.BARREL then @entities.push Entity.barrel new Vector i+.5, j+.5
-          when LEGEND.GREEN_LIGHT then @entities.push Entity.greenLight new Vector i+.5, j+.5
-          when LEGEND.PILLAR then @entities.push Entity.pillar new Vector i+.5, j+.5
+          when LEGEND.GREEN_BARREL then @entities.push new GreenBarrel new Vector i+.5, j+.5
+          when LEGEND.LIGHT then @entities.push new Light new Vector i+.5, j+.5
+          when LEGEND.PILLAR then @entities.push new Pillar new Vector i+.5, j+.5
 
   renderBackground: (canvas) ->
     context = canvas.getContext '2d'
