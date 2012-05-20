@@ -1,5 +1,4 @@
-#= require constants
-#= require_tree Math
+#= require_tree ../Math
 
 # Default Sprite Sheet and Dimensions
 SPRITE_SHEET = new Image()

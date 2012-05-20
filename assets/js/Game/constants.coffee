@@ -20,11 +20,6 @@ TEXTURE.MOSSY_STONE  = addTexture '/img/wall/mossy.png'
 TEXTURE.PURPLE_STONE = addTexture '/img/wall/purplestone.png'
 TEXTURE.WOOD         = addTexture '/img/wall/wood.png'
 
-## Entities
-TEXTURE.BARREL       = addTexture '/img/entity/barrel.png'
-TEXTURE.PILLAR       = addTexture '/img/entity/pillar.png'
-TEXTURE.GREEN_LIGHT  = addTexture '/img/entity/greenlight.png'
-
 # Basic map array
 MAP_STRINGS = [
   '            ',

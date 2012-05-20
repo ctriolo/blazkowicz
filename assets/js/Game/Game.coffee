@@ -1,4 +1,4 @@
-#= require_tree Math
+#= require_tree ../Math
 #= require constants
 #= require Player
 #= require Map

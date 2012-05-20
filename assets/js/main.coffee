@@ -1,4 +1,4 @@
-#= require Game
+#= require Game/Game
 
 resize = ->
   h = Math.floor($(window).height()/10)
