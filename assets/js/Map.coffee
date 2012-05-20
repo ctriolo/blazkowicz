@@ -53,9 +53,9 @@ class Map
   renderBackground: (canvas) ->
     context = canvas.getContext '2d'
     context.clearRect 0, 0, canvas.width, canvas.height
-    context.fillStyle = '#BBB'
+    context.fillStyle = '#CCC'
     context.fillRect 0, 0, canvas.width, canvas.height/2
-    context.fillStyle = '#444'
+    context.fillStyle = '#646464'
     context.fillRect 0, canvas.height/2, canvas.width, canvas.height/2
 
   computeIntersections: (ray, player) ->
