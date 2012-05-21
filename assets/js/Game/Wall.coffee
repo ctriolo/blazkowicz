@@ -1,8 +1,9 @@
 #= require_tree ../Math
+#= require Entity
 
-class Wall
+class Wall extends Entity
 
-  constructor: (@line, @texture) ->
+  constructor: (@_line, @texture) ->
     throw 'Need a line and a texture' if not @line or not @texture
 
   @constructFromPoints: (point1, point2, texture) ->
@@ -11,25 +12,12 @@ class Wall
   @constructFromValues: (x1, y1, x2, y2, texture) ->
     @constructFromPoints new Vector(x1,y1), new Vector(x2,y2), texture
 
-  computeIntersection: (ray) ->
-    intersection = @line.computeIntersection ray
-    intersection?.attach this
-    intersection
+  line: -> @_line
+  computeCollision: (ray) -> @computeIntersection ray
 
-  render: (canvas, player, column, intersection) ->
-    context = canvas.getContext '2d'
-    IMAGE_HEIGHT = 64
-    IMAGE_WIDTH = 64
-    distance = intersection.point().sub(player.position).pro(player.towards)
-    context.drawImage @texture,
-      Math.floor(IMAGE_WIDTH * intersection.point().dis(@line.point1) / @line.length()), #sx
-      0, # sy
-      1, # sWidth
-      IMAGE_HEIGHT, #sHeight
-      column, # dx
-      Math.floor(canvas.height/2 - (canvas.height / distance)/2), #dy
-      1, # dWidth
-      Math.floor(canvas.height / distance) #dHeight
+  spriteSheet: -> @texture
+  spriteDimensions: -> [64,64]
+  spriteOffsets: -> [0,0]
 
 # Export
 window.Wall = Wall

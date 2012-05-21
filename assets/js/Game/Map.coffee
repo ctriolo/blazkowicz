@@ -84,14 +84,8 @@ class Map
   computeCollision: (ray) ->
     min = null
 
-    # Compute wall collision
-    for wall in @walls
-      intersection = wall.computeIntersection ray
-      if intersection? and (!min or intersection.distance < min.distance)
-        min = intersection
-
-    # Computer entity collision
-    for entity in @entities
+    # Compute nearest entity collision
+    for entity in @walls.concat @entities
       intersection = entity.computeCollision ray
       if intersection? and (!min or intersection.distance < min.distance)
         min = intersection

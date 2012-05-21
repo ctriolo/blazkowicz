@@ -120,4 +120,4 @@ class Bones extends Entity
   spriteOffsets: -> [19,0]
 window.Bones = Bones
 
-# Finish the rest
+# TODO: Finish the rest

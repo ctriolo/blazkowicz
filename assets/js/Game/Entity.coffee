@@ -25,6 +25,7 @@ class Entity
     intersection?.attach this
     intersection
 
+  # TODO: Tidy this function up. Make look nice.
   render: (canvas, player, column, intersection) ->
     context = canvas.getContext '2d'
     line = @line(player)
