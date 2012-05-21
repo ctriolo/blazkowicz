@@ -1,7 +1,6 @@
 #= require_tree ../Math
-#= require Wall
+#= require Walls
 #= require Entities
-#= require constants
 
 class Map
   LEGEND = {}
@@ -27,24 +26,22 @@ class Map
   constructor: (@array) ->
     @walls = []
     @entities = []
-    addBlock = (map, a, b, texture) ->
-      map.walls.push Wall.constructFromValues   a,   b, a+1,   b, texture
-      map.walls.push Wall.constructFromValues   a,   b,   a, b+1, texture
-      map.walls.push Wall.constructFromValues a+1, b+1,   a, b+1, texture
-      map.walls.push Wall.constructFromValues a+1, b+1, a+1,   b, texture
+    addBlock = (type, a, b) =>
+      @walls.push Wall.constructFromValues type,   a,   b, a+1,   b
+      @walls.push Wall.constructFromValues type, a+1,   b, a+1, b+1
+      @walls.push Wall.constructFromValues type, a+1, b+1,   a, b+1
+      @walls.push Wall.constructFromValues type,   a, b+1,   a,   b
     for i in [0...@array.length]
       for j in [0...@array[i].length]
         switch(array[i][j])
           # Spawn
           when LEGEND.SPAWN then @spawn = new Vector i+.5, j+.5
           # Wall
-          when LEGEND.RED_BRICK then addBlock this, i, j, TEXTURE.RED_BRICK
-          when LEGEND.BLUE_STONE then addBlock this, i, j, TEXTURE.BLUE_STONE
-          when LEGEND.GREY_STONE then addBlock this, i, j, TEXTURE.GREY_STONE
-          when LEGEND.COLOR_STONE then addBlock this, i, j, TEXTURE.COLOR_STONE
-          when LEGEND.MOSSY_STONE then addBlock this, i, j, TEXTURE.MOSSY_STONE
-          when LEGEND.PURPLE_STONE then addBlock this, i, j, TEXTURE.PURPLE_STONE
-          when LEGEND.WOOD then addBlock this, i, j, TEXTURE.WOOD
+          when LEGEND.RED_BRICK    then addBlock RedBrick,    i, j
+          when LEGEND.BLUE_STONE   then addBlock BlueStone,   i, j
+          when LEGEND.GREY_STONE   then addBlock GreyStone,   i, j
+          when LEGEND.PURPLE_STONE then addBlock PurpleStone, i, j
+          when LEGEND.WOOD         then addBlock WoodPanel,   i, j
           # Entities
           when LEGEND.GREEN_BARREL then @entities.push new GreenBarrel new Vector i+.5, j+.5
           when LEGEND.LIGHT then @entities.push new Light new Vector i+.5, j+.5
