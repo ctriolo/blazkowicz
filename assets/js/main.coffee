@@ -7,8 +7,8 @@ resize = ->
   $('canvas').width  u*16
   $('canvas').height u*10
   $('canvas').css({'margin-left': -(u*16)/2, 'margin-top': -(u*10)/2})
-  $('canvas')[0].width = $('canvas').width()
-  $('canvas')[0].height = $('canvas').height()
+  $('canvas')[0].width = 640
+  $('canvas')[0].height = 400
 
 main = () =>
   $(window).resize resize

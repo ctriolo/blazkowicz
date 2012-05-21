@@ -26,7 +26,7 @@ class Entity
     intersection
 
   # TODO: Tidy this function up. Make look nice.
-  render: (canvas, player, column, intersection) ->
+  render: (canvas, vX, vY, vWidth, vHeight, player, column, intersection) ->
     context = canvas.getContext '2d'
     line = @line(player)
     [spriteWidth, spriteHeight] = @spriteDimensions()
@@ -39,10 +39,10 @@ class Entity
       spriteYOffset + 0, # sy
       1, # sWidth
       spriteHeight, #sHeight
-      column, # dx
-      Math.floor(canvas.height/2 - (canvas.height / distance)/2), #dy
+      vX + column, # dx
+      vY + Math.floor(vHeight/2 - (vHeight / distance)/2), #dy
       1, # dWidth
-      Math.floor(canvas.height / distance) #dHeight
+      Math.floor(vHeight / distance) #dHeight
 
   spriteSheet: -> SPRITE_SHEET
   spriteDimensions: -> SPRITE_DIMENSIONS

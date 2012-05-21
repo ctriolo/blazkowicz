@@ -47,13 +47,13 @@ class Map
           when LEGEND.LIGHT then @entities.push new Light new Vector i+.5, j+.5
           when LEGEND.PILLAR then @entities.push new Pillar new Vector i+.5, j+.5
 
-  renderBackground: (canvas) ->
+  renderBackground: (canvas, VIEW_X, VIEW_Y, VIEW_WIDTH, VIEW_HEIGHT) ->
     context = canvas.getContext '2d'
-    context.clearRect 0, 0, canvas.width, canvas.height
+    context.clearRect VIEW_X, VIEW_Y, VIEW_WIDTH, VIEW_HEIGHT
     context.fillStyle = '#CCC'
-    context.fillRect 0, 0, canvas.width, canvas.height/2
+    context.fillRect VIEW_X, VIEW_Y, VIEW_WIDTH, VIEW_HEIGHT/2
     context.fillStyle = '#646464'
-    context.fillRect 0, canvas.height/2, canvas.width, canvas.height/2
+    context.fillRect VIEW_X, VIEW_Y + VIEW_HEIGHT/2, VIEW_WIDTH, VIEW_HEIGHT/2
 
   computeIntersections: (ray, player) ->
 

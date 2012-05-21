@@ -3,6 +3,11 @@
 #= require Player
 #= require Map
 
+GAME_BACKGROUND = new Image()
+GAME_BACKGROUND.src = '/img/gamebg.png'
+HUD_BACKGROUND = new Image()
+HUD_BACKGROUND.src = '/img/hudbg.png'
+
 class Game
 
   constructor: (@canvas) ->
@@ -13,21 +18,37 @@ class Game
     @update()
 
   render: ->
+    CANVAS_WIDTH = 400
+    CANVAS_HEIGHT = 640
+    VIEW_WIDTH = 608
+    VIEW_HEIGHT = 304
+    VIEW_X = 16
+    VIEW_Y = 8
+    HUD_X = 0
+    HUD_Y = 320
+
     mmIntersections = []
 
-    # Render the background
-    @map.renderBackground @canvas
+    # Render the view background
+    @map.renderBackground @canvas, VIEW_X, VIEW_Y, VIEW_WIDTH, VIEW_HEIGHT
 
     # Render the walls
-    for column in [0...@canvas.width]
-      ray = @player.constructRay @canvas.width, column
+    for column in [0...VIEW_WIDTH]
+      ray = @player.constructRay VIEW_WIDTH, column
       intersections = @map.computeIntersections ray, @player
       for intersection in intersections
-        intersection.object.render @canvas, @player, column, intersection
+        intersection.object.render @canvas, VIEW_X, VIEW_Y, VIEW_WIDTH, VIEW_HEIGHT, @player, column, intersection
       mmIntersections.push intersections[0] if intersections[0]
 
+    # Render the game background
+    # Rendered after the view to hide drawings past the view box
+    @canvas.getContext('2d').drawImage(GAME_BACKGROUND, 0, 0)
+
     # Render the mini-map
-    @map.renderMiniMap @canvas, @player, mmIntersections
+    #@map.renderMiniMap @canvas, @player, mmIntersections
+
+    # Render the HUD
+    @canvas.getContext('2d').drawImage(HUD_BACKGROUND, HUD_X, HUD_Y)
 
   update: ->
 
