@@ -1,6 +1,10 @@
 {
     "name": "application-name"
   , "version": "0.0.1"
+  , "engines": {
+      "node": ">=0.6.1"
+    , "npm": ">=1.1.9"
+  }
   , "private": true
   , "dependencies": {
       "express": "2.5.8"
