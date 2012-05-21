@@ -58,12 +58,12 @@ class Game
     dt = (@updated - old) / 1000
 
     # Translate key presses into player actions
-    @player.moveLeft    dt if @keys[65] or @keys[37]
+    @player.moveLeft    dt if @keys[65]
     @player.moveFoward  dt if @keys[87] or @keys[38]
-    @player.moveRight   dt if @keys[68] or @keys[39]
+    @player.moveRight   dt if @keys[68]
     @player.moveBack    dt if @keys[83] or @keys[40]
-    @player.rotateLeft  dt if @keys[81]
-    @player.rotateRight dt if @keys[69]
+    @player.rotateLeft  dt if @keys[81] or @keys[37]
+    @player.rotateRight dt if @keys[69] or @keys[39]
     @player.update dt, @map
 
     # Translate received key presses into enemy actions
@@ -74,7 +74,7 @@ class Game
 
     # Set this function to be called again
     callback = -> window.game.update()
-    setTimeout callback, 16
+    setTimeout callback, 35
 
   # Buffer key presses
   keyup: (key) -> @keys[key] = 0
