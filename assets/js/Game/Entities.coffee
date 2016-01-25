@@ -1,4 +1,4 @@
-#= require Entity
+#= require ./Entity.js
 
 class Puddle extends Entity
   constructor: (position) -> super(position)

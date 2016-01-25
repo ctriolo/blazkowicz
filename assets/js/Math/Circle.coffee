@@ -1,4 +1,4 @@
-#= require Intersection
+#= require ./Intersection.js
 
 class Circle
   constructor: (@origin, @radius) ->

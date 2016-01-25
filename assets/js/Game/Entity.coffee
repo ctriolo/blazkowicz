@@ -1,10 +1,5 @@
 #= require_tree ../Math
 
-# Default Sprite Sheet and Dimensions
-SPRITE_SHEET = new Image()
-SPRITE_SHEET.src = '/img/entities.png'
-SPRITE_DIMENSIONS = [128, 128]
-
 class Entity
   constructor: (@position) ->
 
@@ -44,8 +39,13 @@ class Entity
       1, # dWidth
       Math.floor(vHeight / distance) #dHeight
 
-  spriteSheet: -> SPRITE_SHEET
-  spriteDimensions: -> SPRITE_DIMENSIONS
+  # remove these
+  spriteSheet: -> 
+    sheet = new Image()
+    sheet.src = '/img/entities.png'
+    sheet
+  spriteDimensions: -> [128, 128]
+
   tangible: -> throw 'Needs to be implemented by a sub-class.'
   spriteOffsets: -> throw 'Needs to be implemented by a sub-class.'
 

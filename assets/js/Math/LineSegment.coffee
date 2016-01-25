@@ -1,4 +1,4 @@
-#= require Intersection
+#= require ./Intersection.js
 
 class LineSegment
   constructor: (@point1, @point2) ->

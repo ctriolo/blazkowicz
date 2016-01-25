@@ -1,4 +1,4 @@
-#= require Wall
+#= require ./Wall.js
 
 # TODO: Add a wall legend. Each wall associated with an id eg. 'W01'
 # TODO: Finish adding walls.

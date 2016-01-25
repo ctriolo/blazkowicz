@@ -1,6 +1,6 @@
 #= require_tree ../Math
-#= require Walls
-#= require Entities
+#= require ./Walls.js
+#= require ./Entities.js
 
 class Map
   LEGEND = {}
@@ -33,7 +33,7 @@ class Map
       @walls.push Wall.constructFromValues type,   a, b+1,   a,   b
     for i in [0...@array.length]
       for j in [0...@array[i].length]
-        switch(array[i][j])
+        switch(@array[i][j])
           # Spawn
           when LEGEND.SPAWN then @spawn = new Vector i+.5, j+.5
           # Wall

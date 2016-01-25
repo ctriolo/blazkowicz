@@ -1,7 +1,7 @@
 #= require_tree ../Math
-#= require constants
-#= require Player
-#= require Map
+#= require ./constants.js
+#= require ./Player.js
+#= require ./Map.js
 
 GAME_BACKGROUND = new Image()
 GAME_BACKGROUND.src = '/img/gamebg.png'
@@ -32,7 +32,7 @@ class Game
     # Render the view background
     @map.renderBackground @canvas, VIEW_X, VIEW_Y, VIEW_WIDTH, VIEW_HEIGHT
 
-    # Render the walls
+    # Render the walls & entities
     for column in [0...VIEW_WIDTH]
       ray = @player.constructRay VIEW_WIDTH, column
       intersections = @map.computeIntersections ray, @player
@@ -45,7 +45,7 @@ class Game
     @canvas.getContext('2d').drawImage(GAME_BACKGROUND, 0, 0)
 
     # Render the mini-map
-    #@map.renderMiniMap @canvas, @player, mmIntersections
+    @map.renderMiniMap @canvas, @player, mmIntersections
 
     # Render the HUD
     @canvas.getContext('2d').drawImage(HUD_BACKGROUND, HUD_X, HUD_Y)

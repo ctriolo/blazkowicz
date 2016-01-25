@@ -1,10 +1,5 @@
 #= require_tree ../Math
-#= require Entity
-
-# Default Sprite Sheet and Dimensions
-SPRITE_SHEET = new Image()
-SPRITE_SHEET.src = '/img/walls.png'
-SPRITE_DIMENSIONS = [64, 64]
+#= require ./Entity.js
 
 class Wall extends Entity
 
@@ -20,8 +15,12 @@ class Wall extends Entity
   line: -> @_line
   computeCollision: (ray) -> @computeIntersection ray
 
-  spriteSheet: -> SPRITE_SHEET
-  spriteDimensions: -> SPRITE_DIMENSIONS
+  # remove these
+  spriteSheet: -> 
+    sheet = new Image()
+    sheet.src = '/img/walls.png'
+    sheet
+  spriteDimensions: -> [64, 64]
 
 # Export
 window.Wall = Wall

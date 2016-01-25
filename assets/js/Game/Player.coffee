@@ -1,5 +1,5 @@
 #= require_tree ../Math
-#= require constants
+#= require ./constants.js
 
 class Player
   PLAYER_RADIUS        = .2
